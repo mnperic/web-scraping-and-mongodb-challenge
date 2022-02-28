@@ -1,7 +1,7 @@
 import sys
 from flask import Flask, render_template, jsonify, redirect
 import pymongo
-import scrape_mars
+import mars_scrape
 
 sys.setrecursionlimit(2000)
 app = Flask(__name__)
@@ -12,11 +12,11 @@ collection = db.mars_facts
 
 @app.route('/scrape')
 def scrape():
-    mars = scrape_mars.scrape()
+    mars = mars_scrape.scrape()
     print("\n\n\n")
 
     db.mars_facts.insert_one(mars)
-    return "Scrapped data"
+    return "Some scraped data"
 
 @app.route("/")
 def home():
